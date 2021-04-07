@@ -1,0 +1,109 @@
+$accent-light: #61dafb;
+$bg-light: #a7a7a7;
+$bg-dark: #282c34;
+$box-size: calc(30vw);
+$cell-size: calc(9.53vw);
+
+button {
+  margin: 20px;
+}
+
+.sudoku-wrapper {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+
+.sudoku-container {
+  background-color: #a7a7a7;
+  color: #61dafb;
+  position: relative;
+
+  .sudoku-box-wrapper {
+    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // opacity: 0.5;
+    // opacity: 0;
+    background-color: #0000003f;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    flex-wrap: wrap;
+    z-index: 0;
+
+    .sudoku-box {
+      background-color: $bg-light;
+      // height: 20vw;
+      // width: 20vw;
+      height: $box-size;
+      width: $box-size;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(10px + 2vmin);
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .sudoku-box:nth-child(2n) {
+    background-color: #c9c9c900;
+  }
+
+  .sudoku-board-wrapper {
+    position: relative;
+    z-index: 10;
+
+    .sudoku-board {
+      // opacity: 0;
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(9, 1fr);
+      grid-gap: 2px;
+      flex-wrap: wrap;
+
+      .sudoku-cell {
+        background-color: rgba(0, 0, 0, 0.185);
+        height: 4vw;
+        width: 4vw;
+        height: $cell-size;
+        width: $cell-size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: calc(10px + 2vmin);
+        font-weight: bold;
+        padding: 0;
+        margin: 0;
+
+        input {
+          overflow: hidden;
+          background: none;
+          outline: none;
+          border: none;
+          color: white;
+          text-align: center;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .sudoku-box {
+    max-height: 12vw;
+    max-width: 12vw;
+  }
+  .sudoku-cell {
+    max-height: 3.88vw;
+    max-width: 3.88vw;
+  }
+}
