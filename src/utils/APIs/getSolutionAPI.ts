@@ -1,6 +1,6 @@
 // code and API from https://github.com/bertoort/sugoku
 
-type Board = (number | null)[][];
+type Board = number[][];
 
 const encodeBoard = (board: Board) =>
 	board.reduce(
@@ -20,15 +20,16 @@ export const getSudokuSolution = async (
 	board: Board
 ): Promise<Board | undefined> => {
 	try {
+		console.log('getting solution for', { board: board });
 		const url = `https://sugoku.herokuapp.com/solve`;
 		const response = await fetch(url, {
 			method: 'POST',
-			body: encodeParams(board),
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: encodeParams({ board: board }),
+			// headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		});
 		const data = await response.json();
+		console.log(data);
 		const solution = data.solution;
-		console.log(solution);
 		return solution;
 	} catch (e) {
 		new Error(e);

@@ -1,5 +1,20 @@
 {
   "cSpell.words": [
+    "console",
+    "const",
+    "export",
+    "from",
+    "get",
+    "import",
+    "log",
+    "makepuzzle",
+    "number",
+    "puzzle",
+    "ratepuzzle",
+    "return",
+    "solution",
+    "solvepuzzle",
+    "sudoku",
     "uuidv"
   ],
   "cSpell.enableFiletypes": [

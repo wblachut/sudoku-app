@@ -5,7 +5,7 @@ import { uuid } from 'uuidv4';
 
 type Board = number[][] | undefined; // import types ??
 type BoxWrapProps = {
-	board: Board;
+	board?: Board;
 	// onClick?: () => number;
 };
 
@@ -14,7 +14,7 @@ export const BoxWrapper = ({
 	board = emptySudokuBoard,
 }: BoxWrapProps): JSX.Element => (
 	<div className={`sudoku-box-wrapper`}>
-		{emptySudokuBoard.map((array, i) => {
+		{board.map(() => {
 			return <Box key={uuid()} />;
 		})}
 	</div>

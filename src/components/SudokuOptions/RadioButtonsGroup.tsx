@@ -4,7 +4,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-// import PropTypes from 'prop-types';
 
 // type Difficulty = 'easy' | 'medium' | 'hard';
 type RadioBtnProps = {
@@ -20,10 +19,9 @@ export const RadioButtonsGroup = ({
 	difficulty = 'easy',
 	setDifficulty,
 }: RadioBtnProps): JSX.Element => {
-	// const [difficulty, setDifficulty] = React.useState();
-
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setDifficulty((event.target as HTMLInputElement).value);
+		console.log((event.target as HTMLInputElement).value);
 	};
 
 	return (
@@ -56,8 +54,3 @@ export const RadioButtonsGroup = ({
 };
 
 export default RadioButtonsGroup;
-
-// RadioButtonsGroup.propTypes = {
-// 	difficulty: PropTypes.string,
-// 	setDifficulty: PropTypes.number,
-// };
