@@ -1,49 +1,92 @@
-import React from 'react';
-import './sudokuOptions.scss';
+import React, { useState, useEffect } from 'react';
+import './SudokuOptions.scss';
+import {
+	handleNewGame,
+	handleValidateSudoku,
+	handleValidateFullBoard,
+	handleFetchBoard,
+} from './index';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import RadioButtonsGroup from './RadioButtonsGroup';
-import { getSudokuSolution } from '../../utils/APIs/getSolutionAPI';
-// import { getSudoku } from '../../utils/sudokuFunctions';
+import { SudoOptionsProps } from './types';
 
-type Board = number[][] | undefined; // import types ??
-type SudoOptionsProps = {
-	difficulty: string;
-	setDifficulty: React.Dispatch<React.SetStateAction<string>>;
-	board: Board;
-	setBoard: React.Dispatch<React.SetStateAction<Board | undefined>>;
-};
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		root: {
+			'& > *': {
+				margin: theme.spacing(2),
+				// position: 'static',
+			},
+		},
+	})
+);
 
 export const SudokuOptions = ({
-	difficulty = 'easy',
-	setDifficulty,
-}: // board,
-// setBoard,
-// difficulty,
-// setDifficulty,
-SudoOptionsProps): JSX.Element => {
+	solution,
+	board,
+	setBoard,
+	setSudoku,
+}: SudoOptionsProps): JSX.Element => {
+	const classes = useStyles();
+	const [candidate, setCandidate] = useState(board);
+	const [isValidating, setValidating] = useState(false);
+
+	useEffect(() => {
+		handleValidateFullBoard(
+			board,
+			candidate,
+			solution,
+			isValidating,
+			setBoard,
+			setValidating,
+			setCandidate
+		);
+		// console.log('useEffect for end check !');
+	}, [board]);
+
 	return (
 		<section className="Options-box-wrapper">
-			<RadioButtonsGroup
-				difficulty={difficulty}
-				setDifficulty={setDifficulty}
-			/>
-			<Button
-				variant="contained"
-				color="primary"
-				disableElevation
-				onClick={() => getSudokuSolution}
-				// getSudokuSolution(board)
-			>
-				New Game
-			</Button>
-			<Button
-				variant="contained"
-				color="primary"
-				disableElevation
-				onClick={() => getSudokuSolution}
-			>
-				Validate
-			</Button>
+			<div className={classes.root}>
+				<Button
+					color="primary"
+					variant="contained"
+					onClick={() => handleNewGame(setSudoku, setCandidate, setValidating)}
+				>
+					New Game
+				</Button>
+				<Button
+					color="primary"
+					variant="contained"
+					onClick={() =>
+						handleValidateSudoku(
+							board,
+							solution,
+							candidate,
+							isValidating,
+							setBoard,
+							setCandidate,
+							setValidating
+						)
+					}
+				>
+					{isValidating ? 'Return' : 'Validate'}
+				</Button>{' '}
+				<p>
+					<Button
+						color="secondary"
+						variant="contained"
+						// size="small"
+						onClick={() =>
+							// onFetchBoardClick(setSudoku, setCandidate, setValidating) {
+							//	open popUp with input field
+							// }
+							handleFetchBoard(board, setSudoku, setCandidate, setValidating)
+						}
+					>
+						Fetch Board
+					</Button>
+				</p>
+			</div>
 		</section>
 	);
 };

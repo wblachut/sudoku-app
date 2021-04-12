@@ -32,19 +32,15 @@ export const getSudoku = () => {
 		board: getFormattedBoard(raw),
 		solution: getFormattedSolution(rawSolution),
 	};
-	const sol2 = [...result.solution];
-	console.log(sol2);
-	console.log(result.solution);
-	console.log(sol2 == result.solution);
-	console.log(sol2 === result.solution);
-	console.log(validateSudoku(sol2, result.solution));
 	return result;
 };
 
-export const validateSudoku = (candidate: any, solution: any) => {
+export const alertSudokuValidation = (candidate: any, solution: any): void => {
 	if (
-		candidate.length === solution.length &&
 		candidate.every((value: number, index: number) => value === solution[index])
-	)
-		return true;
+	) {
+		alert('Congratulations, sudoku solved correctly !');
+	} else {
+		alert('Sorry, sudoku solved wrong !');
+	}
 };

@@ -1,5 +1,5 @@
-import { getSudokuBoard } from '../../utils/APIs/getBoardAPI';
-import { getSudokuSolution } from '../../utils/APIs/getSolutionAPI';
+import { getSudokuBoard } from './getBoardAPI';
+import { getSudokuSolution } from './getSolutionAPI';
 
 type Difficulty = 'easy' | 'medium' | 'hard';
 type Board = number[][];

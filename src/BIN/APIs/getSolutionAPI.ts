@@ -25,7 +25,7 @@ export const getSudokuSolution = async (
 		const response = await fetch(url, {
 			method: 'POST',
 			body: encodeParams({ board: board }),
-			// headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		});
 		const data = await response.json();
 		console.log(data);
