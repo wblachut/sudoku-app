@@ -57,6 +57,8 @@ export const handleValidateFullBoard = (
 		);
 		alertSudokuValidation(board, solution);
 	}
+	const inputs = document.getElementsByTagName('input').length;
+	console.log(inputs);
 };
 
 const validateSudokuBoard = (

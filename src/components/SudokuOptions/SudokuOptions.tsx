@@ -21,6 +21,18 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
+const onFetchBoardClick = () => {
+	const input = prompt('paste board JSON here');
+	if (input === '' || input === null) return;
+	try {
+		const userSudoku = JSON.parse(input);
+		console.log(input);
+	} catch (e) {
+		alert('invalid sudoku input');
+		console.log(e);
+	}
+};
+
 export const SudokuOptions = ({
 	solution,
 	board,
@@ -76,11 +88,11 @@ export const SudokuOptions = ({
 						color="secondary"
 						variant="contained"
 						// size="small"
-						onClick={() =>
-							// onFetchBoardClick(setSudoku, setCandidate, setValidating) {
+						onClick={
+							() => onFetchBoardClick()
 							//	open popUp with input field
 							// }
-							handleFetchBoard(board, setSudoku, setCandidate, setValidating)
+							// handleFetchBoard(board, setSudoku, setCandidate, setValidating)
 						}
 					>
 						Fetch Board
