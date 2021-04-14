@@ -10,3 +10,4 @@ React sudoku web application built with TypeScript. User can enter digits by cli
 - replace all `any` TS types
 - update styles to only use **CSS-in-JS** (eg. styled components or only MUI) not **sass**
 - add file fetching instead of prompt
+- fix picker displaying behind buttons for lower rows
