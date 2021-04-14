@@ -5,8 +5,8 @@ export const solveUserBoard = (board: Board): any => {
 	if (checkForSolved(board)) {
 		return board;
 	} else {
-		const allPossibilities = getAllPossibleBoards(board);
-		const candidates = filterCandidates(allPossibilities);
+		const possibilities = getPossibleSolutions(board);
+		const candidates = filterPossibleBoards(possibilities);
 		return searchForSolution(candidates);
 	}
 };
@@ -36,7 +36,7 @@ const searchForSolution = (candidates: Board[]): Board | boolean => {
 	}
 };
 
-const filterCandidates = (candidates: Board[]): any => {
+const filterPossibleBoards = (candidates: Board[]): any => {
 	const filtered = [];
 	if (!candidates) return;
 	for (let i = 0; i < candidates.length; i++) {
@@ -47,7 +47,7 @@ const filterCandidates = (candidates: Board[]): any => {
 	return filtered;
 };
 
-const getAllPossibleBoards = (board: Board): Board[] => {
+const getPossibleSolutions = (board: Board): Board[] => {
 	const candidates = [];
 	const emptySquare = getFirstEmptySquare(board);
 	if (emptySquare !== undefined) {
