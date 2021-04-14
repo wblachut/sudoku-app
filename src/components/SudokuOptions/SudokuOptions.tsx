@@ -21,18 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
-const onFetchBoardClick = () => {
-	const input = prompt('paste board JSON here');
-	if (input === '' || input === null) return;
-	try {
-		const userSudoku = JSON.parse(input);
-		console.log(input);
-	} catch (e) {
-		alert('invalid sudoku input');
-		console.log(e);
-	}
-};
-
 export const SudokuOptions = ({
 	solution,
 	board,
@@ -44,16 +32,7 @@ export const SudokuOptions = ({
 	const [isValidating, setValidating] = useState(false);
 
 	useEffect(() => {
-		handleValidateFullBoard(
-			board,
-			candidate,
-			solution,
-			isValidating,
-			setBoard,
-			setValidating,
-			setCandidate
-		);
-		// console.log('useEffect for end check !');
+		handleValidateFullBoard(board, solution);
 	}, [board]);
 
 	return (
@@ -83,21 +62,18 @@ export const SudokuOptions = ({
 				>
 					{isValidating ? 'Return' : 'Validate'}
 				</Button>{' '}
-				<p>
+				<div>
 					<Button
 						color="secondary"
 						variant="contained"
-						// size="small"
-						onClick={
-							() => onFetchBoardClick()
-							//	open popUp with input field
-							// }
-							// handleFetchBoard(board, setSudoku, setCandidate, setValidating)
-						}
+						size="small"
+						onClick={() => {
+							handleFetchBoard(setSudoku, setCandidate, setValidating);
+						}}
 					>
 						Fetch Board
 					</Button>
-				</p>
+				</div>
 			</div>
 		</section>
 	);

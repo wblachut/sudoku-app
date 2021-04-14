@@ -20,7 +20,7 @@ export const SudokuEmptyCell = ({
 		<PopupState variant="popper" popupId="sudoku-popper">
 			{(popupState) => (
 				<ClickAwayListener onClickAway={handleClickAway}>
-					<div className="sudoku-cell__input-div" onClick={handleClick}>
+					<div className="sudoku-cell-input-div" onClick={handleClick}>
 						<CellInputElement
 							col={col}
 							row={row}
