@@ -37,7 +37,7 @@ export type CellInpElementProps = {
 	board: Board;
 	inputRef: React.MutableRefObject<HTMLInputElement | null>;
 	popupState: any;
-	// (alias) const PopupState: React.ComponentType<Props>
+	// PopupState: React.ComponentType<Props>
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
