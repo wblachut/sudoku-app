@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Sudoku.scss';
-import { getSudoku } from '../../utils/sudokuFunctions';
 import BoxWrapper from './BoxWrapper/BoxWrapper';
-import SudokuCell from './SudokuCell/SudokuCell';
+import SudokuRow from './SudokuRow';
 import SudokuOptions from '../SudokuOptions/SudokuOptions';
 import { Board, SudokuType } from './types';
+import { getSudoku } from '../../utils/sudokuFunctions';
+import { uuid } from 'uuidv4';
 
 export const Sudoku = (): JSX.Element => {
 	const sudokuGame = getSudoku();
@@ -23,19 +24,16 @@ export const Sudoku = (): JSX.Element => {
 			<div className="sudoku-board-wrapper">
 				<div className="sudoku-board">
 					{board &&
-						board.map((arr, j: number) => {
-							return arr.map((element, i: number) => {
-								return (
-									<SudokuCell
-										key={(j.toString(), i.toString())}
-										i={i}
-										j={j}
-										val={element}
-										board={board}
-										setBoard={setBoard}
-									/>
-								);
-							});
+						board.map((array, row: number) => {
+							return (
+								<SudokuRow
+									array={array}
+									row={row}
+									board={board}
+									setBoard={setBoard}
+									key={uuid()}
+								/>
+							);
 						})}
 				</div>
 			</div>

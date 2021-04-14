@@ -1,4 +1,4 @@
-$box-size: calc(29vw);
+$box-size: 29vw;
 
 .sudoku-box-wrapper {
   position: absolute;
@@ -8,17 +8,12 @@ $box-size: calc(29vw);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  flex-wrap: wrap;
   z-index: 0;
 
   .sudoku-box {
     background-color: #38424d86;
     height: $box-size;
     width: $box-size;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
     padding: 0;
     margin: 0;
   }
