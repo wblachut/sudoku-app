@@ -85,7 +85,7 @@ export const alertSudokuValidation = (
 	candidate: Board,
 	solution: Board
 ): void => {
-	if (candidate.every((array, index) => array === solution[index])) {
+	if (candidate.every((array, index) => array == solution[index])) {
 		alert('Congratulations, sudoku solved correctly !');
 	} else {
 		console.log(candidate);
