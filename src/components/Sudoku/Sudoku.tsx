@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Sudoku.scss';
-import BoxWrapper from './BoxWrapper/BoxWrapper';
 import SudokuRow from './SudokuRow';
 import SudokuOptions from '../SudokuOptions/SudokuOptions';
 import { Board, SudokuType } from './types';
@@ -20,7 +19,6 @@ export const Sudoku = (): JSX.Element => {
 
 	return (
 		<div className="sudoku-container">
-			<BoxWrapper board={board} />
 			<div className="sudoku-board-wrapper">
 				<div className="sudoku-board">
 					{board &&

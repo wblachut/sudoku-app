@@ -1,19 +1,14 @@
-.sudoku-cell {
   .sudoku-cell-input-div {
-    height: 50px;
-    padding: 0;
-
     input {
       overflow: hidden;
-      width: 50px;
+      width: 100%;
       background: none;
       outline: none;
       border: none;
       color: white;
       text-align: center;
-      font-size: 1.6rem;
-      height: 50px;
+      font-size: 2vmax;
+      min-height: 50px;
       padding: 0;
     }
   }
-}

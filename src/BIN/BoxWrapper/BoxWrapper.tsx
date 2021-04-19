@@ -1,7 +1,7 @@
 import React from 'react';
 import './BoxWrapper.scss';
 import { uuid } from 'uuidv4';
-import { BoxWrapProps } from '../types';
+import { BoxWrapProps } from '../../components/Sudoku/types';
 
 export const BoxWrapper = ({ board }: BoxWrapProps): JSX.Element => (
 	<div className="sudoku-box-wrapper">

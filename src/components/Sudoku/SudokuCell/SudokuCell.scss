@@ -1,15 +1,13 @@
-$cell-size: 9.53vw;
-
 .sudoku-container {
   .sudoku-board {
     .sudoku-cell {
       background-color: rgba(0, 0, 0, 0.185);
-      height: $cell-size;
-      width: $cell-size;
+      height: 10vw;
+      width: 10vw;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: calc(10px + 2vmin);
+      font-size: 2vmax;
       font-weight: bold;
       padding: 0;
       margin: 0;
@@ -18,12 +16,25 @@ $cell-size: 9.53vw;
         color: lightcoral;
       }
     }
+
+    .sudoku-cell:nth-of-type(9n + 4),
+    .sudoku-cell:nth-of-type(9n + 5),
+    .sudoku-cell:nth-of-type(9n + 6),
+    .sudoku-cell:nth-of-type(n + 28):nth-of-type(-n + 54) {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .sudoku-cell:nth-of-type(n + 28):nth-of-type(-n + 54):nth-of-type(9n + 4),
+    .sudoku-cell:nth-of-type(n + 28):nth-of-type(-n + 54):nth-of-type(9n + 5),
+    .sudoku-cell:nth-of-type(n + 28):nth-of-type(-n + 54):nth-of-type(9n + 6) {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 736px) {
   .sudoku-cell {
-    max-height: 3.88vw;
-    max-width: 3.88vw;
+    max-height: 4vw;
+    max-width: 4vw;
   }
 }

@@ -1,7 +1,6 @@
 import { Board } from '../components/Sudoku/types';
 
 export const solveUserBoard = (board: Board): any => {
-	// only works for 3x3
 	if (checkForSolved(board)) {
 		return board;
 	} else {
