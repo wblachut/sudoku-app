@@ -5,8 +5,8 @@ import { CellInpElementProps } from '../../types';
 import { onCellInput } from '../index';
 
 export const CellInput = ({
-	col,
-	row,
+	rowIndex,
+	cellIndex,
 	board,
 	inputRef,
 	popupState,
@@ -16,8 +16,7 @@ export const CellInput = ({
 		<React.Fragment>
 			<input
 				type="tel"
-				maxLength={1}
-				data-cord={[row, col]}
+				data-cord={[rowIndex, cellIndex]}
 				ref={inputRef}
 				{...bindToggle(popupState)}
 				onInput={(e) => onCellInput(e, board, setBoard)}

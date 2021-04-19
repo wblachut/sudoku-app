@@ -5,7 +5,6 @@ import Popper from '@material-ui/core/Popper';
 import { bindPopper } from 'material-ui-popup-state';
 import { PickerProps, PickerTileProps } from '../../types';
 import { onPickerClick } from '../index';
-import { uuid } from 'uuidv4';
 
 export const Picker = ({
 	inputRef,
@@ -18,11 +17,11 @@ export const Picker = ({
 			{({ TransitionProps }) => (
 				<Grow {...TransitionProps} timeout={500}>
 					<div className="sudoku-picker">
-						{board.map((array, index) => {
+						{board.map((row, rowIndex) => {
 							return (
 								<PickerTile
-									element={index}
-									key={uuid()}
+									tileNumber={rowIndex}
+									key={`tile${rowIndex}`}
 									inputRef={inputRef}
 									board={board}
 									setBoard={setBoard}
@@ -39,7 +38,7 @@ export const Picker = ({
 export default Picker;
 
 const PickerTile = ({
-	element,
+	tileNumber,
 	inputRef,
 	board,
 	setBoard,
@@ -50,7 +49,7 @@ const PickerTile = ({
 			className="sudoku-picker-box"
 			onClick={(e) => onPickerClick(e, board, inputRef, setBoard)}
 		>
-			{element + 1}
+			{tileNumber + 1}
 		</div>
 	);
 };

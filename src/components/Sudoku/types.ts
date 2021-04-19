@@ -10,30 +10,29 @@ export type BoxWrapProps = {
 };
 
 export type SudoRowProps = {
-	array: number[];
-	row: number;
+	rowIndex: number;
 	board: Board;
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type SudoCellProps = {
-	col: number;
-	row: number;
-	element: number;
+	rowIndex: number;
+	cellIndex: number;
+	cellValue: number;
 	board: Board;
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type SudoEmptyCellProps = {
-	col: number;
-	row: number;
+	rowIndex: number;
+	cellIndex: number;
 	board: Board;
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type CellInpElementProps = {
-	col: number;
-	row: number;
+	rowIndex: number;
+	cellIndex: number;
 	board: Board;
 	inputRef: React.MutableRefObject<HTMLInputElement | null>;
 	popupState: any;
@@ -49,7 +48,7 @@ export type PickerProps = {
 };
 
 export type PickerTileProps = {
-	element: number;
+	tileNumber: number;
 	inputRef: React.MutableRefObject<HTMLInputElement | null>;
 	board: Board;
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;

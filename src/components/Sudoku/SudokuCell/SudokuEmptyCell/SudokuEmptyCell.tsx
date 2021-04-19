@@ -6,15 +6,15 @@ import CellInputElement from './CellInputElement';
 import Picker from '../Picker/Picker';
 
 export const SudokuEmptyCell = ({
-	col,
-	row,
+	cellIndex,
+	rowIndex,
 	board,
 	setBoard,
 }: SudoEmptyCellProps): JSX.Element => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const handleClickAway = (): void => setIsOpen(false);
-	const handleClick = (): void => setIsOpen((open) => !open);
+	const handleClick = (): void => setIsOpen((isOpen) => !isOpen);
 
 	return (
 		<PopupState variant="popper" popupId="sudoku-popper">
@@ -22,8 +22,8 @@ export const SudokuEmptyCell = ({
 				<ClickAwayListener onClickAway={handleClickAway}>
 					<div className="sudoku-cell-input-div" onClick={handleClick}>
 						<CellInputElement
-							col={col}
-							row={row}
+							rowIndex={rowIndex}
+							cellIndex={cellIndex}
 							board={board}
 							inputRef={inputRef}
 							popupState={popupState}

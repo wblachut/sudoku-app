@@ -4,7 +4,6 @@ import SudokuRow from './SudokuRow';
 import SudokuOptions from '../SudokuOptions/SudokuOptions';
 import { Board, SudokuType } from './types';
 import { getSudoku } from '../../utils/sudokuFunctions';
-import { uuid } from 'uuidv4';
 
 export const Sudoku = (): JSX.Element => {
 	const sudokuGame = getSudoku();
@@ -22,14 +21,13 @@ export const Sudoku = (): JSX.Element => {
 			<div className="sudoku-board-wrapper">
 				<div className="sudoku-board">
 					{board &&
-						board.map((array, row: number) => {
+						board.map((row, rowIndex: number) => {
 							return (
 								<SudokuRow
-									array={array}
-									row={row}
+									rowIndex={rowIndex}
 									board={board}
 									setBoard={setBoard}
-									key={uuid()}
+									key={`row${rowIndex}`}
 								/>
 							);
 						})}
