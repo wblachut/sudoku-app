@@ -6,6 +6,8 @@ export const onCellInput = (
 	setBoard: React.Dispatch<React.SetStateAction<Board>>
 ): void => {
 	const cords = e.currentTarget.getAttribute('data-cord');
+	// console.log(e.nativeEvent.data);
+	//e.currentTarget.value = e.nativeEvent.data;
 	if (isNaN(+e.currentTarget.value)) {
 		e.currentTarget.value = '';
 		return;
