@@ -40,6 +40,7 @@ const assignValueToCell = (
 	const x = cords[2];
 	const y = cords[0];
 	const updatedBoard = Object.assign(board);
-	updatedBoard[y][x] = value;
+	updatedBoard[y][x].value = value;
+	// updatedBoard[y][x].type = 'filled';
 	setBoard(updatedBoard);
 };

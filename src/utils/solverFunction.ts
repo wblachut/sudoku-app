@@ -1,6 +1,6 @@
-import { Board } from '../components/Sudoku/types';
+import { NumberBoard } from '../components/Sudoku/types';
 
-export const solveUserBoard = (board: Board): any => {
+export const solveUserBoard = (board: NumberBoard): any => {
 	if (checkForSolved(board)) {
 		return board;
 	} else {
@@ -10,7 +10,7 @@ export const solveUserBoard = (board: Board): any => {
 	}
 };
 
-function checkForSolved(board: Board) {
+function checkForSolved(board: NumberBoard) {
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
 			if (board[i][j] === 0) {
@@ -21,7 +21,9 @@ function checkForSolved(board: Board) {
 	return true;
 }
 
-const searchForSolution = (candidates: Board[]): Board | boolean => {
+const searchForSolution = (
+	candidates: NumberBoard[]
+): NumberBoard | boolean => {
 	if (candidates.length < 1) {
 		return false;
 	} else {
@@ -35,7 +37,7 @@ const searchForSolution = (candidates: Board[]): Board | boolean => {
 	}
 };
 
-const filterPossibleBoards = (candidates: Board[]): any => {
+const filterPossibleBoards = (candidates: NumberBoard[]): any => {
 	const filtered = [];
 	if (!candidates) return;
 	for (let i = 0; i < candidates.length; i++) {
@@ -46,7 +48,7 @@ const filterPossibleBoards = (candidates: Board[]): any => {
 	return filtered;
 };
 
-const getPossibleSolutions = (board: Board): Board[] => {
+const getPossibleSolutions = (board: NumberBoard): NumberBoard[] => {
 	const candidates = [];
 	const emptySquare = getFirstEmptySquare(board);
 	if (emptySquare !== undefined) {
@@ -63,7 +65,7 @@ const getPossibleSolutions = (board: Board): Board[] => {
 	return candidates;
 };
 
-const getFirstEmptySquare = (board: Board): number[] | undefined => {
+const getFirstEmptySquare = (board: NumberBoard): number[] | undefined => {
 	for (let i = 0; i < 9; i++) {
 		for (let j = 0; j < 9; j++) {
 			if (board[i][j] === 0) {
@@ -73,11 +75,11 @@ const getFirstEmptySquare = (board: Board): number[] | undefined => {
 	}
 };
 
-const checkBoard = (board: Board): boolean | undefined => {
+const checkBoard = (board: NumberBoard): boolean | undefined => {
 	if (checkRows(board) && checkColumns(board) && checkBoxes(board)) return true;
 };
 
-const checkRows = (board: Board): boolean => {
+const checkRows = (board: NumberBoard): boolean => {
 	for (let row = 0; row < board.length; row++) {
 		const used: number[] = [];
 		for (let i = 0; i < board.length; i++) {
@@ -92,7 +94,7 @@ const checkRows = (board: Board): boolean => {
 	return true;
 };
 
-const checkColumns = (board: Board): boolean => {
+const checkColumns = (board: NumberBoard): boolean => {
 	for (let col = 0; col < board.length; col++) {
 		const used: number[] = [];
 		for (let i = 0; i < board.length; i++) {
@@ -107,7 +109,7 @@ const checkColumns = (board: Board): boolean => {
 	return true;
 };
 
-const checkBoxes = (board: Board): boolean => {
+const checkBoxes = (board: NumberBoard): boolean => {
 	const startingBoxCords = [
 		[0, 0],
 		[0, 1],

@@ -14,7 +14,7 @@ export const SudokuRow = ({
 					<SudokuCell
 						rowIndex={rowIndex}
 						cellIndex={cellIndex}
-						cellValue={cell}
+						cell={cell}
 						board={board}
 						setBoard={setBoard}
 						key={`row${rowIndex}col${cellIndex}`}

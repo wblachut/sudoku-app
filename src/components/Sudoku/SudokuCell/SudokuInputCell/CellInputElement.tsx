@@ -1,5 +1,4 @@
 import React from 'react';
-import './CellInputElement.scss';
 import { bindToggle } from 'material-ui-popup-state';
 import { CellInpElementProps } from '../../types';
 import { onCellInput } from '../index';

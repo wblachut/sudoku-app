@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import './SudokuOptions.scss';
 import {
 	handleNewGame,
 	handleValidateSudoku,
 	handleValidateFullBoard,
-	handleFetchBoard,
+	handleUploadBoard,
 } from './index';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { SudoOptionsProps } from './types';
+import { SudoOptionsProps, HTMLInputEvent } from './types';
+import styled from 'styled-components';
+import { useAppDispatch } from '../App/context/store/store.hooks';
+import { useSelector } from 'react-redux';
+import { getSudokuSelector } from '../Sudoku/sudokuSlice';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -21,61 +24,72 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 );
 
+const Input = styled('input')({
+	display: 'none',
+});
+
 export const SudokuOptions = ({
 	solution,
 	board,
 	setBoard,
 	setSudoku,
 }: SudoOptionsProps): JSX.Element => {
+	const dispatch = useAppDispatch();
+	const sudokuGame = useSelector(getSudokuSelector);
+
 	const classes = useStyles();
-	const [candidate, setCandidate] = useState(board);
 	const [isValidating, setValidating] = useState(false);
 
 	useEffect(() => {
-		handleValidateFullBoard(board, solution);
+		handleValidateFullBoard(board);
 	}, [board]);
 
 	return (
-		<section className="Options-box-wrapper">
-			<div className={classes.root}>
-				<Button
-					color="primary"
-					variant="contained"
-					onClick={() => handleNewGame(setSudoku, setCandidate, setValidating)}
-				>
-					New Game
-				</Button>
-				<Button
-					color="primary"
-					variant="contained"
-					onClick={() =>
-						handleValidateSudoku(
-							board,
-							solution,
-							candidate,
-							isValidating,
-							setBoard,
-							setCandidate,
-							setValidating
-						)
-					}
-				>
-					{isValidating ? 'Return' : 'Validate'}
-				</Button>{' '}
-				<div>
-					<Button
-						color="secondary"
-						variant="contained"
-						size="small"
-						onClick={() => {
-							handleFetchBoard(setSudoku, setCandidate, setValidating);
-						}}
-					>
-						Fetch Board
+		<div className={classes.root}>
+			<Button
+				color="primary"
+				variant="contained"
+				disableElevation
+				onClick={() => handleNewGame(setSudoku, setValidating)}
+			>
+				New Game
+			</Button>
+			<Button
+				color="primary"
+				variant="contained"
+				disableElevation
+				onClick={() =>
+					handleValidateSudoku(
+						board,
+						solution,
+						// redux validating
+						// dispatch(setValidating(sudokuGame.validating));
+						sudokuGame.validating,
+						setBoard,
+						setValidating
+					)
+				}
+			>
+				{/* Here change to redux validating */}
+				{isValidating ? 'Return' : 'Validate'}
+			</Button>{' '}
+			<div>
+				<label htmlFor="contained-button-file">
+					<Input
+						accept=".json"
+						id="contained-button-file"
+						type="file"
+						// HTMLInputEvent => not working on MUI Input.
+						onChange={(e: any) =>
+							handleUploadBoard(e, setSudoku, setValidating)
+						}
+					/>
+					<Button variant="contained" component="span" color="secondary">
+						Upload Board
 					</Button>
-				</div>
+				</label>
 			</div>
-		</section>
+		</div>
 	);
 };
 

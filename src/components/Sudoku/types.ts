@@ -1,8 +1,16 @@
-export type Board = number[][];
+export type Cell = {
+	value: number;
+	readOnly: boolean;
+	valid: boolean;
+};
+
+export type NumberBoard = number[][];
+
+export type Board = Cell[][];
 
 export type SudokuType = {
 	board: Board;
-	solution: Board;
+	solution: NumberBoard;
 };
 
 export type BoxWrapProps = {
@@ -18,7 +26,7 @@ export type SudoRowProps = {
 export type SudoCellProps = {
 	rowIndex: number;
 	cellIndex: number;
-	cellValue: number;
+	cell: Cell;
 	board: Board;
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
@@ -43,7 +51,7 @@ export type CellInpElementProps = {
 export type PickerProps = {
 	board: Board;
 	inputRef: React.MutableRefObject<HTMLInputElement | null>;
-	popupState: any;
+	// popupState: any;
 	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 

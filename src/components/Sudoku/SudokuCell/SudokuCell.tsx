@@ -1,35 +1,37 @@
 import React from 'react';
-import './SudokuCell.scss';
 import { SudoCellProps } from '../types';
-import SudokuEmptyCell from './SudokuEmptyCell/SudokuEmptyCell';
-
-const EMPTY = 0;
-const ERROR = 10;
+import SudokuInputCell from './SudokuInputCell/SudokuInputCell';
+import { CellDiv, ValidateSpan } from './Style';
 
 export const SudokuCell = ({
 	rowIndex,
 	cellIndex,
-	cellValue,
+	cell,
 	board,
 	setBoard,
 }: SudoCellProps): JSX.Element => {
 	return (
-		<div
+		<CellDiv
 			className="sudoku-cell"
 			data-cord={[rowIndex, cellIndex]}
 			key={`row${rowIndex}col${cellIndex}`}
 		>
-			{cellValue !== EMPTY && cellValue !== ERROR && cellValue}
-			{cellValue === ERROR && <span className="sudoku-invalid-element">x</span>}
-			{cellValue === EMPTY && (
-				<SudokuEmptyCell
+			{cell.readOnly && cell.value}
+			{cell.value !== 0 && !cell.valid && (
+				// need to add && isValidating
+				<ValidateSpan>{cell.value}</ValidateSpan>
+				// <ValidateSpan color >{cell.value}</ValidateSpan>
+			)}
+			{cell.value === 0 && (
+				// change to !call.readOnly && isValidating
+				<SudokuInputCell
 					rowIndex={rowIndex}
 					cellIndex={cellIndex}
 					board={board}
 					setBoard={setBoard}
 				/>
 			)}
-		</div>
+		</CellDiv>
 	);
 };
 
