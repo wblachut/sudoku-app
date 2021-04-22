@@ -11,7 +11,7 @@ import {
 	bindToggle,
 	bindPopper,
 } from 'material-ui-popup-state/hooks';
-import { useAppDispatch } from '../../../App/context/store/store.hooks';
+import { useAppDispatch } from '../../../App/context/store.hooks';
 import { setSudokuBoard, getSudokuSelector } from '../../sudokuSlice';
 import { useSelector } from 'react-redux';
 

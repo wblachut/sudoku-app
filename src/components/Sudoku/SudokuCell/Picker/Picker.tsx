@@ -1,7 +1,7 @@
 import React from 'react';
+import { PickerDiv, TileDiv } from './Style';
 import { PickerProps, PickerTileProps } from '../../types';
 import { onPickerClick } from '../index';
-import { PickerDiv, TileDiv } from './Style';
 
 export const Picker = ({
 	cords,

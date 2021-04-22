@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
+import { Board, NumberBoard } from '../Sudoku/types';
+import { SudoOptionsProps, HTMLInputEvent } from './types';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
 import {
 	handleNewGame,
 	handleValidateSudoku,
 	handleValidateFullBoard,
 	handleUploadBoard,
 } from './index';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { SudoOptionsProps, HTMLInputEvent } from './types';
-import styled from 'styled-components';
-import { useAppDispatch } from '../App/context/store/store.hooks';
+import { useAppDispatch } from '../App/context/store.hooks';
 import { useSelector } from 'react-redux';
 import {
 	getSudokuSelector,
 	setValidate,
 	setSudoku,
 } from '../Sudoku/sudokuSlice';
-import { Board, NumberBoard } from '../Sudoku/types';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({

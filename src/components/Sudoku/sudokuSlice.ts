@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import preloadedState, {
-	SudokuState,
-} from '../App/context/store/preloadedState';
-import { RootState } from '../App/context/store/store';
-import { Board, SudokuType } from './types';
+import preloadedState, { SudokuState } from '../App/context/preloadedState';
+import { RootState } from '../App/context/store';
+import { Board, NumberBoard, SudokuType } from './types';
 
 type SetSudokuPayloadType = {
 	board: Board;
-	solution: Board;
+	solution: NumberBoard;
 	validating: false;
 };
 
@@ -18,7 +16,7 @@ const sudokuSlice = createSlice({
 		setSudoku: (
 			state: SudokuState = preloadedState,
 			action: PayloadAction<SudokuType>
-		): any => {
+		): SetSudokuPayloadType => {
 			return {
 				board: action.payload.board,
 				solution: action.payload.solution,

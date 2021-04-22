@@ -1,6 +1,6 @@
 import React from 'react';
-import { bindToggle } from 'material-ui-popup-state';
 import { CellInpElementProps } from '../../types';
+import { bindToggle } from 'material-ui-popup-state';
 import { onCellInput } from '../index';
 
 export const CellInput = ({

@@ -74,7 +74,7 @@ export const replaceNullWithZeros = (board: NumberBoard): NumberBoard => {
 export const getUserSudoku = (userInput: string): SudokuType => {
 	const parsedUserBoard = JSON.parse(userInput).board;
 	const parsedUserSolution = JSON.parse(userInput).board;
-	// *FIND BETTER SOLUTION* problems with deep cloning...
+	// *FIND BETTER SOLUTION* problem with deep cloning...
 	const numberUserBoard = replaceNullWithZeros(parsedUserBoard);
 	const numberUserSolution = replaceNullWithZeros(parsedUserSolution);
 	const board = formatToBoardOfCells(numberUserBoard);
@@ -84,10 +84,4 @@ export const getUserSudoku = (userInput: string): SudokuType => {
 		board: board,
 		solution: solution,
 	};
-};
-
-export const alertSudokuValidation = (candidate: Board): void => {
-	candidate.every((array: Cell[]) => {
-		array.every((cell: Cell) => cell.isValid);
-	});
 };

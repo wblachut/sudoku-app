@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { sudokuReducer } from '../../../Sudoku/sudokuSlice';
+import { sudokuReducer } from '../../Sudoku/sudokuSlice';
 // import preloadedState from './preloadedState';
 
 const reducer = {

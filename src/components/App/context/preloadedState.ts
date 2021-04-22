@@ -1,5 +1,5 @@
-import { getSudoku } from '../../../../utils/sudokuFunctions';
-import { Board, NumberBoard } from '../../../Sudoku/types';
+import { getSudoku } from '../../../utils/sudokuFunctions';
+import { Board, NumberBoard } from '../../Sudoku/types';
 
 export type SudokuState = {
 	board: Board;

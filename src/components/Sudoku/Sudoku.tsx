@@ -1,19 +1,19 @@
 import React from 'react';
+import { Wrapper, SudokuBoard } from './Styles';
+import { Cell } from './types';
 import SudokuRow from './SudokuRow';
 import SudokuOptions from '../SudokuOptions/SudokuOptions';
-import { Wrapper, SudokuBoard } from './Styles';
 import { useSelector } from 'react-redux';
 import { getSudokuSelector } from './sudokuSlice';
 
 export const Sudoku = (): JSX.Element => {
-	// const sudoku = useSelector(getSudokuSelector);
 	const board = useSelector(getSudokuSelector).board;
 
 	return (
 		<Wrapper>
 			<SudokuBoard>
 				{board &&
-					board.map((row, rowIndex: number) => {
+					board.map((row: Cell[], rowIndex: number) => {
 						return (
 							<SudokuRow
 								rowIndex={rowIndex}

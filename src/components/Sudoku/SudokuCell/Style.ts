@@ -36,7 +36,6 @@ export const CellDiv = styled.div`
 // 	color: lightcoral;
 // 	font-family: arial;
 // 	font-weight: 400;
-
 // `;
 
 export const InvalidSpan = styled.span`

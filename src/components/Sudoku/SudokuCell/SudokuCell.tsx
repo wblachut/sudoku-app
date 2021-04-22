@@ -1,7 +1,7 @@
 import React from 'react';
+import { CellDiv, InvalidSpan, ValidSpan } from './Style';
 import { SudoCellProps } from '../types';
 import SudokuInputCell from './SudokuInputCell/SudokuInputCell';
-import { CellDiv, InvalidSpan, ValidSpan } from './Style';
 import { useSelector } from 'react-redux';
 import { getSudokuSelector } from '../sudokuSlice';
 
@@ -12,7 +12,6 @@ export const SudokuCell = ({
 	board,
 }: SudoCellProps): JSX.Element => {
 	const isValidating = useSelector(getSudokuSelector).validating;
-	// const spanColor = cell.isValid ? 'lime' : 'lightcoral';
 
 	return (
 		<CellDiv
@@ -22,8 +21,6 @@ export const SudokuCell = ({
 		>
 			{cell.isStatic && cell.value}
 			{cell.value !== 0 && !cell.isValid && isValidating && (
-				// Use validateSpan with props instead ?
-				// <ValidateSpan color >{cell.value}</ValidateSpan>
 				<InvalidSpan>{cell.value}</InvalidSpan>
 			)}
 			{!cell.isStatic && cell.isValid && isValidating && (
