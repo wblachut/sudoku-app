@@ -1,16 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { CellInputDiv } from './Style';
+import { Board, SudoEmptyCellProps } from '../../types';
+import Grow from '@material-ui/core/Grow';
+import Popper from '@material-ui/core/Popper';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import CellInputElement from './CellInputElement';
+import Picker from '../Picker/Picker';
 import {
 	usePopupState,
 	bindToggle,
 	bindPopper,
 } from 'material-ui-popup-state/hooks';
-import Grow from '@material-ui/core/Grow';
-import Popper from '@material-ui/core/Popper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Board, SudoEmptyCellProps } from '../../types';
-import CellInputElement from './CellInputElement';
-import Picker from '../Picker/Picker';
-import { CellInputDiv } from './Style';
 import { useAppDispatch } from '../../../App/context/store/store.hooks';
 import { setSudokuBoard, getSudokuSelector } from '../../sudokuSlice';
 import { useSelector } from 'react-redux';

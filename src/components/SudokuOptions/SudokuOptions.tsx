@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
 	handleNewGame,
 	handleValidateSudoku,
@@ -15,7 +15,6 @@ import {
 	getSudokuSelector,
 	setValidate,
 	setSudoku,
-	setSudokuBoard,
 } from '../Sudoku/sudokuSlice';
 import { Board, NumberBoard } from '../Sudoku/types';
 
@@ -45,9 +44,6 @@ export const SudokuOptions = ({ board }: SudoOptionsProps): JSX.Element => {
 	const setNewSudoku = (board: Board, solution: NumberBoard) => {
 		dispatch(setSudoku({ board, solution }));
 	};
-	const setBoard = (board: Board) => {
-		dispatch(setSudokuBoard(board));
-	};
 
 	useEffect(() => {
 		handleValidateFullBoard(board);
@@ -59,7 +55,7 @@ export const SudokuOptions = ({ board }: SudoOptionsProps): JSX.Element => {
 				color="primary"
 				variant="contained"
 				disableElevation
-				onClick={() => handleNewGame(setNewSudoku, setValidating)}
+				onClick={() => handleNewGame(setNewSudoku)}
 			>
 				New Game
 			</Button>
@@ -78,9 +74,7 @@ export const SudokuOptions = ({ board }: SudoOptionsProps): JSX.Element => {
 						id="contained-button-file"
 						type="file"
 						// HTMLInputEvent type is not working with File Input as MUI Button.
-						onChange={(e: any) =>
-							handleUploadBoard(e, setNewSudoku, setValidating)
-						}
+						onChange={(e: any) => handleUploadBoard(e, setNewSudoku)}
 					/>
 					<Button
 						variant="contained"

@@ -74,7 +74,7 @@ export const replaceNullWithZeros = (board: NumberBoard): NumberBoard => {
 export const getUserSudoku = (userInput: string): SudokuType => {
 	const parsedUserBoard = JSON.parse(userInput).board;
 	const parsedUserSolution = JSON.parse(userInput).board;
-	// problems with deep cloning...
+	// *FIND BETTER SOLUTION* problems with deep cloning...
 	const numberUserBoard = replaceNullWithZeros(parsedUserBoard);
 	const numberUserSolution = replaceNullWithZeros(parsedUserSolution);
 	const board = formatToBoardOfCells(numberUserBoard);
@@ -82,56 +82,12 @@ export const getUserSudoku = (userInput: string): SudokuType => {
 
 	return {
 		board: board,
-		// board: [],
 		solution: solution,
-		// solution: [],
 	};
-};
-
-export const toggleValidateSudokuBoard = (
-	board: Board,
-	validating: boolean,
-	solution?: NumberBoard
-): Board => {
-	board.forEach((array: Cell[], y: number) => {
-		array.forEach((cell: Cell, x: number) => {
-			if (!validating && !cell.isStatic && solution) {
-				if (cell.value === solution[y][x]) {
-					board[y][x].isValid = true;
-				}
-				if (cell.value !== solution[y][x] && cell.value !== 0) {
-					board[y][x].isValid = false;
-					// change valid to boolean to state = valid string
-				}
-				// Go back to state = input => normal
-			}
-		});
-	});
-	return board;
 };
 
 export const alertSudokuValidation = (candidate: Board): void => {
 	candidate.every((array: Cell[]) => {
 		array.every((cell: Cell) => cell.isValid);
-		alert('Sudoku solved correctly');
 	});
 };
-
-const checkNumberBoardShape = (board: NumberBoard) => {
-	const SUDOKU_SIZE = 9;
-	if (board.length !== SUDOKU_SIZE || board[0].length !== SUDOKU_SIZE) {
-		return false;
-	} else return true;
-};
-
-const tryBoard = [
-	[0, 0, 8, 0, 0, 9, 0, 0, 0],
-	[0, 0, 0, 0, 5, 0, 7, 0, 0],
-	[0, 6, 0, 0, 0, 8, 0, 2, 0],
-	[0, 2, 0, 0, 0, 0, 0, 9, 0],
-	[0, 5, 7, 8, 0, 1, 0, 0, 0],
-	[8, 9, 0, 7, 0, 3, 4, 5, 1],
-	[0, 0, 0, 6, 0, 2, 9, 7, 8],
-	[6, 7, 2, 9, 8, 4, 0, 1, 3],
-	[0, 0, 0, 5, 0, 0, 6, 0, 2],
-];
