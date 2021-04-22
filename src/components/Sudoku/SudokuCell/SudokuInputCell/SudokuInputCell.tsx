@@ -7,19 +7,20 @@ import {
 import Grow from '@material-ui/core/Grow';
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { SudoEmptyCellProps } from '../../types';
+import { Board, SudoEmptyCellProps } from '../../types';
 import CellInputElement from './CellInputElement';
 import Picker from '../Picker/Picker';
 import { CellInputDiv } from './Style';
+import { useAppDispatch } from '../../../App/context/store/store.hooks';
+import { setSudokuBoard, getSudokuSelector } from '../../sudokuSlice';
+import { useSelector } from 'react-redux';
 
 export const SudokuEmptyCell = ({
 	cellIndex,
 	rowIndex,
 	board,
-	setBoard,
 }: SudoEmptyCellProps): JSX.Element => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const inputRef = useRef<HTMLInputElement | null>(null);
 	const handleClickAway = (): void => setIsOpen(false);
 	const handleClick = (): void => setIsOpen((isOpen) => !isOpen);
 	const popupState = usePopupState({
@@ -27,14 +28,19 @@ export const SudokuEmptyCell = ({
 		popupId: 'sudokuPopper',
 	});
 
+	const solution = useSelector(getSudokuSelector).solution;
+	const dispatch = useAppDispatch();
+	const setBoard = (board: Board) => {
+		dispatch(setSudokuBoard(board));
+	};
+
 	return (
 		<ClickAwayListener onClickAway={handleClickAway}>
 			<CellInputDiv onClick={handleClick}>
 				<CellInputElement
-					rowIndex={rowIndex}
-					cellIndex={cellIndex}
+					cords={[rowIndex, cellIndex]}
 					board={board}
-					inputRef={inputRef}
+					solution={solution}
 					popupState={popupState}
 					setBoard={setBoard}
 					{...bindToggle(popupState)}
@@ -44,8 +50,9 @@ export const SudokuEmptyCell = ({
 						{({ TransitionProps }) => (
 							<Grow {...TransitionProps} timeout={500}>
 								<Picker
+									cords={[rowIndex, cellIndex]}
 									board={board}
-									inputRef={inputRef}
+									solution={solution}
 									// popupState={popupState}
 									setBoard={setBoard}
 								/>

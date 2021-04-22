@@ -1,7 +1,7 @@
 export type Cell = {
 	value: number;
-	readOnly: boolean;
-	valid: boolean;
+	isStatic: boolean;
+	isValid: boolean;
 };
 
 export type NumberBoard = number[][];
@@ -20,7 +20,6 @@ export type BoxWrapProps = {
 export type SudoRowProps = {
 	rowIndex: number;
 	board: Board;
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type SudoCellProps = {
@@ -28,36 +27,35 @@ export type SudoCellProps = {
 	cellIndex: number;
 	cell: Cell;
 	board: Board;
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type SudoEmptyCellProps = {
 	rowIndex: number;
 	cellIndex: number;
 	board: Board;
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type CellInpElementProps = {
-	rowIndex: number;
-	cellIndex: number;
+	cords: [number, number];
 	board: Board;
-	inputRef: React.MutableRefObject<HTMLInputElement | null>;
+	solution: NumberBoard;
 	popupState: any;
+	setBoard: (board: Board) => void;
 	// PopupState: React.ComponentType<Props>
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export type PickerProps = {
+	cords: [number, number];
 	board: Board;
-	inputRef: React.MutableRefObject<HTMLInputElement | null>;
+	solution: NumberBoard;
 	// popupState: any;
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
+	setBoard: (board: Board) => void;
 };
 
 export type PickerTileProps = {
+	cords: [number, number];
 	tileNumber: number;
-	inputRef: React.MutableRefObject<HTMLInputElement | null>;
 	board: Board;
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
+	solution: NumberBoard;
+	setBoard: (board: Board) => void;
 };

@@ -35,3 +35,9 @@ export const CellDiv = styled.div`
 export const ValidateSpan = styled.span`
 	color: lightcoral;
 `;
+export const InvalidSpan = styled.span`
+	color: lightcoral;
+`;
+export const ValidSpan = styled.span`
+	color: lime;
+`;

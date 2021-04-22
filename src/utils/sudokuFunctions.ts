@@ -36,8 +36,8 @@ export const formatToBoardOfCells = (numberBoard: NumberBoard): Board => {
 			const value = numberBoard[i][j];
 			const cell: Cell = {
 				value: value,
-				readOnly: value !== 0,
-				valid: value !== 0,
+				isStatic: value !== 0,
+				isValid: value !== 0,
 			};
 			boardOfCells[i][j] = cell;
 		}
@@ -95,12 +95,12 @@ export const toggleValidateSudokuBoard = (
 ): Board => {
 	board.forEach((array: Cell[], y: number) => {
 		array.forEach((cell: Cell, x: number) => {
-			if (!validating && !cell.readOnly && solution) {
+			if (!validating && !cell.isStatic && solution) {
 				if (cell.value === solution[y][x]) {
-					board[y][x].valid = true;
+					board[y][x].isValid = true;
 				}
 				if (cell.value !== solution[y][x] && cell.value !== 0) {
-					board[y][x].valid = false;
+					board[y][x].isValid = false;
 					// change valid to boolean to state = valid string
 				}
 				// Go back to state = input => normal
@@ -112,7 +112,7 @@ export const toggleValidateSudokuBoard = (
 
 export const alertSudokuValidation = (candidate: Board): void => {
 	candidate.every((array: Cell[]) => {
-		array.every((cell: Cell) => cell.valid);
+		array.every((cell: Cell) => cell.isValid);
 		alert('Sudoku solved correctly');
 	});
 };

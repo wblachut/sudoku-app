@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import preloadedState, {
 	SudokuState,
 } from '../App/context/store/preloadedState';
-import { Board } from './types';
+import { RootState } from '../App/context/store/store';
+import { Board, SudokuType } from './types';
 
 type SetSudokuPayloadType = {
 	board: Board;
@@ -14,9 +15,9 @@ const sudokuSlice = createSlice({
 	name: 'sudoku',
 	initialState: preloadedState,
 	reducers: {
-		setSudokuBoard: (
+		setSudoku: (
 			state: SudokuState = preloadedState,
-			action: PayloadAction<SudokuState>
+			action: PayloadAction<SudokuType>
 		): any => {
 			return {
 				board: action.payload.board,
@@ -24,13 +25,16 @@ const sudokuSlice = createSlice({
 				validating: false,
 			};
 		},
-		assignSudokuValue: (
+		setSudokuBoard: (
 			state: SudokuState = preloadedState,
-			action: PayloadAction<SetSudokuPayloadType>
+			action: PayloadAction<Board>
 		): any => {
-			return {};
+			return {
+				...state,
+				board: action.payload,
+			};
 		},
-		setValidating: (
+		setValidate: (
 			state: SudokuState = preloadedState,
 			action: PayloadAction<boolean>
 		): any => {
@@ -42,4 +46,8 @@ const sudokuSlice = createSlice({
 	},
 });
 
-export default sudokuSlice;
+export const { setSudoku, setSudokuBoard, setValidate } = sudokuSlice.actions;
+
+export const getSudokuSelector = (state: RootState) => state.sudoku;
+
+export const sudokuReducer = sudokuSlice.reducer;

@@ -3,36 +3,24 @@ import { HTMLInputEvent } from '../SudokuOptions/types';
 import {
 	getSudoku,
 	getUserSudoku,
-	toggleValidateSudokuBoard,
 	alertSudokuValidation,
 } from '../../utils/sudokuFunctions';
 
 export const handleNewGame = (
-	setSudoku: React.Dispatch<React.SetStateAction<SudokuType>>,
-	setValidating: React.Dispatch<React.SetStateAction<boolean>>,
+	setNewSudoku: (board: Board, solution: NumberBoard) => void,
+	setValidating: (isValidating: boolean) => void,
 	userSudoku?: SudokuType
 ): void => {
 	const newSudoku = userSudoku || getSudoku();
-	setSudoku(newSudoku);
+	setNewSudoku(newSudoku.board, newSudoku.solution);
 	setValidating(false);
-	// dispatch()
 };
 
 export const handleValidateSudoku = (
-	board: Board,
-	solution: NumberBoard,
 	isValidating: boolean,
-	setBoard: React.Dispatch<React.SetStateAction<Board>>,
-	setValidating: React.Dispatch<React.SetStateAction<boolean>>
+	setValidating: (isValidating: boolean) => void
 ): void => {
-	if (!isValidating) {
-		setBoard(toggleValidateSudokuBoard(board, true, solution));
-	} else {
-		setBoard(toggleValidateSudokuBoard(board, false));
-	}
-	setValidating((isValidating) => !isValidating);
-	// dispatch(setValidating(sudokuGame.validating));
-	// console.log(sudokuGame.validating);
+	setValidating(!isValidating);
 };
 
 export const handleValidateFullBoard = (board: Board): void => {
@@ -41,10 +29,10 @@ export const handleValidateFullBoard = (board: Board): void => {
 	}
 };
 
-// deprecated
+// deprecated !
 const handleFetchBoard = (
-	setSudoku: React.Dispatch<React.SetStateAction<SudokuType>>,
-	setValidating: React.Dispatch<React.SetStateAction<boolean>>
+	setNewSudoku: (board: Board, solution: NumberBoard) => void,
+	setValidating: (isValidating: boolean) => void
 ): void => {
 	const userInput = prompt('paste board in form of JSON string');
 	if (typeof userInput !== 'string' || userInput === '') return;
@@ -54,7 +42,7 @@ const handleFetchBoard = (
 			alert('Board is not solvable!');
 			return;
 		}
-		handleNewGame(setSudoku, setValidating, userSudoku);
+		handleNewGame(setNewSudoku, setValidating, userSudoku);
 		alert('User board set correctly...');
 	} catch (e) {
 		alert('Invalid sudoku input');
@@ -64,8 +52,8 @@ const handleFetchBoard = (
 
 export const handleUploadBoard = (
 	e: HTMLInputEvent,
-	setSudoku: React.Dispatch<React.SetStateAction<SudokuType>>,
-	setValidating: React.Dispatch<React.SetStateAction<boolean>>
+	setNewSudoku: (board: Board, solution: NumberBoard) => void,
+	setValidating: (isValidating: boolean) => void
 ): void => {
 	const reader = new FileReader();
 	const file = e.target.files![0];
@@ -79,8 +67,8 @@ export const handleUploadBoard = (
 					alert('Board is not solvable!');
 					return;
 				}
-				handleNewGame(setSudoku, setValidating, userSudoku);
-				alert('User board set correctly...');
+				handleNewGame(setNewSudoku, setValidating, userSudoku);
+				alert('User board uploaded correctly!');
 			}
 		}
 	};

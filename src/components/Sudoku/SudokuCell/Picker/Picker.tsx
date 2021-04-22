@@ -4,8 +4,9 @@ import { onPickerClick } from '../index';
 import { PickerDiv, TileDiv } from './Style';
 
 export const Picker = ({
-	inputRef,
+	cords,
 	board,
+	solution,
 	setBoard,
 }: PickerProps): JSX.Element => {
 	return (
@@ -13,10 +14,11 @@ export const Picker = ({
 			{board.map((row, rowIndex) => {
 				return (
 					<PickerTile
+						cords={cords}
 						tileNumber={rowIndex}
 						key={`tile${rowIndex}`}
-						inputRef={inputRef}
 						board={board}
+						solution={solution}
 						setBoard={setBoard}
 					/>
 				);
@@ -28,16 +30,17 @@ export const Picker = ({
 export default Picker;
 
 const PickerTile = ({
+	cords,
 	tileNumber,
-	inputRef,
 	board,
+	solution,
 	setBoard,
 }: PickerTileProps): JSX.Element => {
 	return (
 		<TileDiv
 			role="button"
 			className="sudoku-picker-box"
-			onClick={(e) => onPickerClick(e, board, inputRef, setBoard)}
+			onClick={(e) => onPickerClick(e, board, solution, cords, setBoard)}
 		>
 			{tileNumber + 1}
 		</TileDiv>

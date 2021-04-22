@@ -2,11 +2,7 @@ import React from 'react';
 import { SudoRowProps } from './types';
 import SudokuCell from './SudokuCell/SudokuCell';
 
-export const SudokuRow = ({
-	rowIndex,
-	board,
-	setBoard,
-}: SudoRowProps): JSX.Element => {
+export const SudokuRow = ({ rowIndex, board }: SudoRowProps): JSX.Element => {
 	return (
 		<React.Fragment>
 			{board[rowIndex].map((cell, cellIndex: number) => {
@@ -16,7 +12,6 @@ export const SudokuRow = ({
 						cellIndex={cellIndex}
 						cell={cell}
 						board={board}
-						setBoard={setBoard}
 						key={`row${rowIndex}col${cellIndex}`}
 					/>
 				);

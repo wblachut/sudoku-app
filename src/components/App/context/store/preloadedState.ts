@@ -1,9 +1,9 @@
 import { getSudoku } from '../../../../utils/sudokuFunctions';
-import { Board } from '../../../Sudoku/types';
+import { Board, NumberBoard } from '../../../Sudoku/types';
 
 export type SudokuState = {
 	board: Board;
-	solution: Board;
+	solution: NumberBoard;
 	validating: boolean;
 };
 

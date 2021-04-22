@@ -11,7 +11,13 @@ import { SudoOptionsProps, HTMLInputEvent } from './types';
 import styled from 'styled-components';
 import { useAppDispatch } from '../App/context/store/store.hooks';
 import { useSelector } from 'react-redux';
-import { getSudokuSelector } from '../Sudoku/sudokuSlice';
+import {
+	getSudokuSelector,
+	setValidate,
+	setSudoku,
+	setSudokuBoard,
+} from '../Sudoku/sudokuSlice';
+import { Board, NumberBoard } from '../Sudoku/types';
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -28,17 +34,20 @@ const Input = styled('input')({
 	display: 'none',
 });
 
-export const SudokuOptions = ({
-	solution,
-	board,
-	setBoard,
-	setSudoku,
-}: SudoOptionsProps): JSX.Element => {
-	const dispatch = useAppDispatch();
-	const sudokuGame = useSelector(getSudokuSelector);
-
+export const SudokuOptions = ({ board }: SudoOptionsProps): JSX.Element => {
 	const classes = useStyles();
-	const [isValidating, setValidating] = useState(false);
+	const isValidating = useSelector(getSudokuSelector).validating;
+
+	const dispatch = useAppDispatch();
+	const setValidating = (isValidating: boolean) => {
+		dispatch(setValidate(isValidating));
+	};
+	const setNewSudoku = (board: Board, solution: NumberBoard) => {
+		dispatch(setSudoku({ board, solution }));
+	};
+	const setBoard = (board: Board) => {
+		dispatch(setSudokuBoard(board));
+	};
 
 	useEffect(() => {
 		handleValidateFullBoard(board);
@@ -50,7 +59,7 @@ export const SudokuOptions = ({
 				color="primary"
 				variant="contained"
 				disableElevation
-				onClick={() => handleNewGame(setSudoku, setValidating)}
+				onClick={() => handleNewGame(setNewSudoku, setValidating)}
 			>
 				New Game
 			</Button>
@@ -58,19 +67,8 @@ export const SudokuOptions = ({
 				color="primary"
 				variant="contained"
 				disableElevation
-				onClick={() =>
-					handleValidateSudoku(
-						board,
-						solution,
-						// redux validating
-						// dispatch(setValidating(sudokuGame.validating));
-						sudokuGame.validating,
-						setBoard,
-						setValidating
-					)
-				}
+				onClick={() => handleValidateSudoku(isValidating, setValidating)}
 			>
-				{/* Here change to redux validating */}
 				{isValidating ? 'Return' : 'Validate'}
 			</Button>{' '}
 			<div>
@@ -79,12 +77,17 @@ export const SudokuOptions = ({
 						accept=".json"
 						id="contained-button-file"
 						type="file"
-						// HTMLInputEvent => not working on MUI Input.
+						// HTMLInputEvent type is not working with File Input as MUI Button.
 						onChange={(e: any) =>
-							handleUploadBoard(e, setSudoku, setValidating)
+							handleUploadBoard(e, setNewSudoku, setValidating)
 						}
 					/>
-					<Button variant="contained" component="span" color="secondary">
+					<Button
+						variant="contained"
+						component="span"
+						disableElevation
+						color="secondary"
+					>
 						Upload Board
 					</Button>
 				</label>

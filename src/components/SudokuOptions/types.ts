@@ -9,9 +9,6 @@ export type SudokuType = {
 
 export type SudoOptionsProps = {
 	board: Board;
-	solution: NumberBoard;
-	setSudoku: React.Dispatch<React.SetStateAction<SudokuType>>;
-	setBoard: React.Dispatch<React.SetStateAction<Board>>;
 };
 
 export interface HTMLInputEvent extends Event {

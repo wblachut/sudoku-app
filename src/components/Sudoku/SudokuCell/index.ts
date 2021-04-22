@@ -1,11 +1,12 @@
-import { Board } from '../types';
+import { Board, NumberBoard } from '../types';
 
 export const onCellInput = (
 	e: React.SyntheticEvent<HTMLInputElement>,
 	board: Board,
-	setBoard: React.Dispatch<React.SetStateAction<Board>>
+	solution: NumberBoard,
+	cords: [number, number],
+	setBoard: (board: Board) => void
 ): void => {
-	const cords = e.currentTarget.getAttribute('data-cord');
 	// console.log(e.nativeEvent.data);
 	//e.currentTarget.value = e.nativeEvent.data;
 	if (isNaN(+e.currentTarget.value)) {
@@ -13,34 +14,44 @@ export const onCellInput = (
 		return;
 	}
 	if (board && cords) {
-		assignValueToCell(+e.currentTarget.value, board, cords, setBoard);
+		const value = +e.currentTarget.value;
+		assignValueToCell(value, board, solution, cords, setBoard);
 	}
 };
 
 export const onPickerClick = (
 	e: React.MouseEvent<HTMLDivElement>,
 	board: Board,
-	inputRef: React.MutableRefObject<any>,
-	setBoard: React.Dispatch<React.SetStateAction<Board>>
+	solution: NumberBoard,
+	cords: [number, number],
+	setBoard: (board: Board) => void
 ): void => {
-	const cords = inputRef.current.parentNode.parentNode.getAttribute(
-		'data-cord'
-	);
 	const val = e.currentTarget.innerHTML;
-	inputRef.current.value = val;
-	assignValueToCell(+val, board, cords, setBoard);
+	assignValueToCell(+val, board, solution, cords, setBoard);
 };
 
 const assignValueToCell = (
 	value: number,
 	board: Board,
-	cords: string,
-	setBoard: React.Dispatch<React.SetStateAction<Board>>
+	solution: NumberBoard,
+	cords: [number, number],
+	setBoard: (board: Board) => void
 ): void => {
-	const x = cords[2];
+	const x = cords[1];
 	const y = cords[0];
-	const updatedBoard = Object.assign(board);
+	console.log(value, cords);
+	// const updatedBoard = Object.create(board);
+	// const updatedBoard = { ...board };
+	// *THIS CODE SHOULD BE FIXED* fix to normal deep clone
+	const updatedBoard = JSON.parse(JSON.stringify(board));
+	// console.log(Object.is(updatedBoard, board));
 	updatedBoard[y][x].value = value;
-	// updatedBoard[y][x].type = 'filled';
+	updatedBoard[y][x].isValid = checkForValidValue(value, solution[y][x]);
+
+	// console.log(updatedBoard[y][x].value);
 	setBoard(updatedBoard);
+};
+
+const checkForValidValue = (boardVal: number, solutionVal: number): boolean => {
+	return boardVal === solutionVal;
 };
