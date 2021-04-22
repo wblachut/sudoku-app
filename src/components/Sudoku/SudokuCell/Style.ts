@@ -31,13 +31,21 @@ export const CellDiv = styled.div`
 	}
 `;
 
-// color: ${(props) => (props.valid ? 'lightgreen' : 'lightcoral')};
-export const ValidateSpan = styled.span`
-	color: lightcoral;
-`;
+// export const ValidateSpan = styled.span`
+// 	color: ${(props) => (props.valid ? 'lightgreen' : 'lightcoral')};
+// 	color: lightcoral;
+// 	font-family: arial;
+// 	font-weight: 400;
+
+// `;
+
 export const InvalidSpan = styled.span`
 	color: lightcoral;
+	font-family: arial;
+	font-weight: 400;
 `;
 export const ValidSpan = styled.span`
-	color: lime;
+	color: springgreen;
+	font-family: arial;
+	font-weight: 400;
 `;
