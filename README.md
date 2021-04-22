@@ -11,8 +11,8 @@ React sudoku web application built with TypeScript. User can enter digits by cli
 - [x] add file fetching instead of prompt
 - [x] make font responsive (KW)
 - [x] remove uuid (KW)
-- [ ] replace all `any` TS types
-- [ ] fix picker displaying behind buttons for lower rows
-- [ ] make input taking value even if already have one (KW)
-- [ ] fix picker tile text alignment
-- [ ] fix picker transition
+- replace all `any` TS types
+- fix picker displaying behind buttons for lower rows
+- make input taking value even if already have one (KW)
+- fix picker tile text alignment
+- fix picker transition
