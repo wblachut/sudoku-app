@@ -23,26 +23,6 @@ export const handleValidateFullBoard = (board: Board): void => {
 	}
 };
 
-// deprecated !
-const handleFetchBoard = (
-	setNewSudoku: (board: Board, solution: NumberBoard) => void
-): void => {
-	const userInput = prompt('paste board in form of JSON string');
-	if (typeof userInput !== 'string' || userInput === '') return;
-	try {
-		const userSudoku = getUserSudoku(userInput);
-		if (!userSudoku.solution) {
-			alert('Board is not solvable!');
-			return;
-		}
-		handleNewGame(setNewSudoku, userSudoku);
-		alert('User board set correctly...');
-	} catch (e) {
-		alert('Invalid sudoku input');
-		console.error(e);
-	}
-};
-
 export const handleUploadBoard = (
 	e: HTMLInputEvent,
 	setNewSudoku: (board: Board, solution: NumberBoard) => void
