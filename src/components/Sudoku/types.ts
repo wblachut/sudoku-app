@@ -5,7 +5,6 @@ export type Cell = {
 };
 
 export type NumberBoard = number[][];
-
 export type Board = Cell[][];
 
 export type SudokuType = {
@@ -40,8 +39,8 @@ export type CellInpElementProps = {
 	board: Board;
 	solution: NumberBoard;
 	popupState: any;
-	setBoard: (board: Board) => void;
 	// PopupState: React.ComponentType<Props>
+	setBoard: (board: Board) => void;
 };
 
 export type PickerProps = {
@@ -58,4 +57,10 @@ export type PickerTileProps = {
 	board: Board;
 	solution: NumberBoard;
 	setBoard: (board: Board) => void;
+};
+
+export type SetSudokuType = {
+	board: Board;
+	solution: NumberBoard;
+	validating: false;
 };

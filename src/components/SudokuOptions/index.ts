@@ -1,5 +1,5 @@
 import { NumberBoard, Board, SudokuType } from '../Sudoku/types';
-import { HTMLInputEvent } from '../SudokuOptions/types';
+import { HTMLInputEvent, UserInput } from '../SudokuOptions/types';
 import { getSudoku, getUserSudoku } from '../../utils/sudokuFunctions';
 
 export const handleNewGame = (
@@ -32,20 +32,29 @@ export const handleUploadBoard = (
 	reader.readAsText(file);
 	reader.onloadend = (e) => {
 		if (e.target?.result) {
-			const userInput: string | ArrayBuffer | null = reader.result;
-			if (typeof userInput === 'string') {
-				try {
-					const userSudoku = getUserSudoku(userInput);
-					if (!userSudoku.solution) {
-						alert('Board is not solvable!');
-						return;
-					}
-					handleNewGame(setNewSudoku, userSudoku);
-					alert('User board set correctly!');
-				} catch (e) {
-					alert('Invalid user board !');
-				}
-			}
+			const userInput: UserInput = reader.result;
+			setInputUserBoard(userInput, setNewSudoku);
 		}
 	};
+};
+
+const setInputUserBoard = (
+	userInput: UserInput,
+	setNewSudoku: (board: Board, solution: NumberBoard) => void
+) => {
+	if (typeof userInput === 'string') {
+		try {
+			const userSudoku = getUserSudoku(userInput);
+			if (!userSudoku.solution) {
+				alert('Board is not solvable!');
+				return;
+			}
+			handleNewGame(setNewSudoku, userSudoku);
+			alert('User board set correctly!');
+		} catch (e) {
+			alert('Invalid user board !');
+		}
+	} else {
+		alert('Wrong board format!');
+	}
 };

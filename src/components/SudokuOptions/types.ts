@@ -1,6 +1,6 @@
 import { Board, NumberBoard } from '../Sudoku/types';
 
-export type UserBoard = Board | JSON;
+export type UserInput = string | ArrayBuffer | null;
 
 export type SudokuType = {
 	board: Board;
