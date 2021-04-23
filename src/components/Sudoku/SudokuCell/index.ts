@@ -7,8 +7,8 @@ export const onCellInput = (
 	cords: [number, number],
 	setBoard: (board: Board) => void
 ): void => {
-	// *THIS CODE SHOULD BE FIXED* not working due to TS
-	//e.currentTarget.value = e.nativeEvent.data;
+	// *CODE BELLOW SHOULD BE WORKING* not working due to TS
+	// e.currentTarget.value = e.nativeEvent.data;
 	if (isNaN(+e.currentTarget.value)) {
 		e.currentTarget.value = '';
 		return;
@@ -41,7 +41,7 @@ const assignValueToCell = (
 	const y = cords[0];
 	// const updatedBoard = Object.create(board);
 	// const updatedBoard = { ...board };
-	// *THIS CODE SHOULD BE FIXED* fix to normal deep clone
+	// *CODE BELLOW SHOULD BE FIXED* fix to normal deep clone
 	const updatedBoard = JSON.parse(JSON.stringify(board));
 	updatedBoard[y][x].value = value;
 	updatedBoard[y][x].isValid = checkForValidValue(value, solution[y][x]);
