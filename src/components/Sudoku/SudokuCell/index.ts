@@ -39,7 +39,7 @@ const assignValueToCell = (
 ): void => {
 	const x = cords[1];
 	const y = cords[0];
-	// const updatedBoard = Object.create(board);
+	// const updatedBoard = Object.assign({}, board);
 	// const updatedBoard = { ...board };
 	// *CODE BELLOW SHOULD BE FIXED* fix to normal deep clone
 	const updatedBoard = JSON.parse(JSON.stringify(board));
